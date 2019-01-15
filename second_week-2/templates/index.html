@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+  <head>
+    <meta charset='UTF-8'>
+    <title>index</title>
+  </head>
+  <body>
+    <ul>
+     {% for titles in file_title %}
+     <a href='http://localhost:3000/files/{{ titles.id }}'>{{ titles.title }}</a>
+     {% endfor %}
+    </ul>
+  </body>
+</html>
