@@ -1,3 +1,13 @@
-<p> {{ file_find.content }} </p>
-<p> {{ file_find.created_time }} </p>
-<p> {{ file_find.category_id }} </p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>file</title>
+  </head>
+  <body>
+    <h1>{{ file_find['title'] }}</h1>
+    <p>{{ file_find['created_time'] }}</p>
+    <p>{{ file_find['content'] }}</p>
+  </body>
+</html>
+
