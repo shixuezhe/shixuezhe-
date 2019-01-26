@@ -1,0 +1,11 @@
+安装redis
+sudo apt-get update
+sudo apt-get install redis-server
+
+安装redis-py模块
+sudo pip install redis
+
+启动
+redis-server
+
+redis-cli
