@@ -1,0 +1,18 @@
+#获取chrome安装包
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#安装浏览器
+sudo apt install -fy
+sudo dpkg -i google-chrome*.deb
+#获取chromedriver压缩包(linux)
+https://chromedriver.storage.googleapis.com/index.html?path=2.45/
+#安装chromedriver到本地
+sudo unzip chromedriver_linux64.zip -d /usr/bin
+
+#其他
+sudo pip install scrapy
+sudo pip install selenium==3.14.0 urllib3==1.23
+
+#相关参考链接
+https://www.jianshu.com/p/7d83e3a324f9
+https://www.jianshu.com/p/861660b6fb3f
+
