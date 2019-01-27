@@ -1,0 +1,23 @@
+安装redis
+sudo apt-get update
+sudo apt-get install redis-server
+
+安装redis-py模块
+sudo pip install redis
+
+启动
+redis-server
+redis-cli
+
+设置反爬（settings.py)
+ROBOTSTXT_OBEY = False     （不遵守规则）
+ITEM_PIPELINES = {
+    'douban_movie.pipelines.DoubanMoviePipeline': 300,
+ }       (启用自己的pipeline)
+
+DOWNLOADER_MIDDLEWARES = {
+     'douban_movie.middlewares.UserAgentMiddleware':200,
+     'douban_movie.middlewares.MyCustomDownloaderMiddleware': None,
+  }  (将原有的改为NONE，把自己的设置为200）
+DOWNLOAD_DELAY = 3 (下载延迟设置为3，防止数据量过大被检测）
+COOKIES_ENABLED = False (防止cookies检测）
