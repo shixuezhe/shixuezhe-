@@ -3,7 +3,7 @@ sudo apt-get update
 sudo apt-get install redis-server
 
 安装redis-py模块
-sudo pip install redis
+sudo pip3 install redis  版本问题很重要，检测脚本是python3的，用pip安装就是2.7的包
 
 启动
 redis-server
