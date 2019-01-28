@@ -1,0 +1,4 @@
+sudo pip3 install aiohttp
+sudo pip3 install scrapy
+
+有中文注释会有编码错误提示，但是不影响结果
