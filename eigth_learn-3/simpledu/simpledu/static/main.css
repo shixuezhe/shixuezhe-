@@ -1,0 +1,6 @@
+.form {
+    /* 设置form的宽度为400px */
+    width: 400px;
+    /* 设置form居中 */
+    margin:0 auto;
+}
