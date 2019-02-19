@@ -1,0 +1,18 @@
+sudo pip3 install flask flask-sqlalchemy mysqlclient
+sudo service mysql start
+mysql -u root
+create database simpledu;
+
+export FLASK_APP=manage.py
+export FLASK_DEBUG=1
+flask shell
+
+>>> from simpledu.models import db,User,Course
+>>> db.create_all()
+>>> user = User(username='admin')
+>>> course1 = Course(name='python course', author=user)
+>>> course2 = Course(name='flask course', author=user)
+>>> db.session.add(user)
+>>> db.session.add(course1)
+>>> db.session.add(course2)
+>>> db.session.commit()
