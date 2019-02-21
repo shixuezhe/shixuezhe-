@@ -1,0 +1,31 @@
+.course img {
+    height: 120px !important;
+}
+
+body {
+    background-color: powderblue;
+}
+
+.form {
+    /* 设置form的宽度为400px */
+    width: 400px;
+    /* 设置form居中 */
+    margin: 0 auto;
+}
+
+a,
+a:hover,
+a:visited {
+    text-decoration: none !important;
+}
+
+.course_name,
+.course_description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.nav-pagination {
+    text-align: center;
+}
