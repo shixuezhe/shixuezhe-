@@ -1,0 +1,23 @@
+安装包
+sudo pip3 install flask flask-slqalchemy flask-migrate flask-wtf flask-login mysqlclient faker scrapy
+
+爬取实验楼课程信息
+scrapy runspider scripts/crawl_shiyanlou_courses.py -o datas/courses.json
+
+创建数据库
+sudo service mysql start
+mysql -u root
+create database simpledu;
+
+配置flask
+export FLASK_APP＝manage.py
+export FLASK_DEBUG＝1
+
+使用flaks－migrate初始化数据库
+flask db migrate -m 'extends database chapter table'
+flask db upgrade
+
+启动flask生成测试数据
+flask shell
+from scripts.generate_test_datas import run
+run()
