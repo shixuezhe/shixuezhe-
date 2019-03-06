@@ -48,10 +48,12 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+{% block big %}
 <div class="jumbotron">
    <h1>JOBPLUS</h1>
    <p>领先的互联网求职.招聘平台</p>
 </div>
+{% endblock %}
   <div class='container'>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}

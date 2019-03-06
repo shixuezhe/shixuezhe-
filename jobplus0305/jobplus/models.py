@@ -6,11 +6,6 @@ from werkzeug.security import generate_password_hash,check_password_hash
 
 db = SQLAlchemy()
 
-user_job = db.Table(
-        'user_job',
-        db.Column('user_id',db.Integer,db.ForeignKey('user.id',ondelete='CASCADE')),
-        db.Column('job_id',db.Integer,db.ForeignKey('job.id',ondelete='CASCADE')))
-
 class Base(db.Model):
     __abstract__ = True
     created_at = db.Column(db.DateTime,default=datetime.utcnow)
@@ -60,13 +55,15 @@ class Company(Base):
     name = db.Column(db.String(128),unique=True,index=True,nullable=False)
     email = db.Column(db.String(64),nullable=False)
     number = db.Column(db.String(48),nullable=False)
-    slug = db.Column(db.String(64),unique=True,index=True,nullable=False)
+    slug = db.Column(db.String(64),unique=True,index=True)
     address = db.Column(db.String(128),nullable=False)
-    site = db.Column(db.String(64),nullable=False)
+    site = db.Column(db.String(64))
     logo = db.Column(db.String(128),nullable=False)
     description = db.Column(db.String(64))
     details = db.Column(db.Text())
-    tags = db.Column(db.String(64))
+    finance = db.Column(db.String(32))
+    type = db.Column(db.String(32))
+    staff_num =db.Column(db.String(32))
     location = db.Column(db.String(32))
     users_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'))
     users = db.relationship('User',uselist=False,backref=db.backref('companies',uselist=False))
@@ -93,6 +90,18 @@ class Job(Base):
     
     def __repr__(self):
         return '<Job:{}>'.format(self.name)
+
+class Resume(Base):
+    __tablename__ = 'resume'
+    id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'),primary_key=True)
+    name = db.Column(db.String(32),nullable=False)
+    age = db.Column(db.SmallInteger)
+    work_age = db.Column(db.SmallInteger)
+    home_city = db.Column(db.String(64))
+    job_experience = db.Column(db.Text)
+    edu_experience = db.Column(db.Text)
+    project_experience = db.Column(db.Text)
+    resume_url = db.Column(db.String(128))
 
 class Delivery(Base):
     STATUS_WAITING = 1
