@@ -24,7 +24,7 @@ class User(Base,UserMixin):
     resume = db.Column(db.String(128))
     experience = db.Column(db.String(24))
     role = db.Column(db.SmallInteger,default=ROLE_USER)
-    user_jobs = db.relationship('Job',secondary=user_job)
+    jobs = db.relationship('Job', backref='user')
     detail = db.relationship('Company',uselist=False)
 
     def __repr__(self):
@@ -86,6 +86,7 @@ class Job(Base):
     description = db.Column(db.Text())
     company_id = db.Column(db.Integer,db.ForeignKey('company.id',ondelete='CASCADE'))
     companies = db.relationship('Company',uselist=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id', ondelete='CASCADE'))
     view_count = db.Column(db.Integer,default=0)
     
     def __repr__(self):

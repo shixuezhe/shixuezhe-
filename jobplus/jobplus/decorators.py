@@ -9,7 +9,7 @@ def role_required(role):
         def wrapper(*args,**kwrargs):
             if not current_user.is_authenticated or current_user.role < role:
                 abort(404)
-            return wrapper(*args,**kwrargs)
+            return func(*args,**kwrargs)
         return wrapper
     return decorator
 

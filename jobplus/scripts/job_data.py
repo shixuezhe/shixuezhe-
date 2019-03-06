@@ -5,7 +5,7 @@ class JobSpider(scrapy.Spider):
     name = 'jobs'
     def start_urls(self):
         url_tmp = ['https://www.lagou.com/zhaopin/']
-        return (url_tmp.format(i) for i range(1,11))
+        return (url_tmp.format(i) for i in range(1,11))
 
     def parse(self, response):
         for job in response.css('div.con_list_item'):
