@@ -3,11 +3,11 @@
 {% block title %}
 Admin
 {% endblock %}
-{% blcok big %}{% endblock %}
+{% block big %}{% endblock %}
 {% block body %}
 <div class='row'>
   <div class='col-md-3'>
-    <h4>控制台</h4>
+    <h4>管理</h4>
     <div class='list-group'>
       <a href='{{ url_for('admin.company_manage') }}' class='list-group-item'>企业管理</a>
       <a href='{{ url_for('admin.user_manage') }}' class='list-group-item'>用户管理</a>

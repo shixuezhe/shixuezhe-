@@ -144,7 +144,7 @@ class CompanyEditForm(FlaskForm):
     submit = SubmitField('提交')
 
     def update_company(self,company):
-        company.username = self.name.data
+        company.name = self.name.data
         company.email = self.email.data
         if self.password.data:
             company.password = self.password.data
