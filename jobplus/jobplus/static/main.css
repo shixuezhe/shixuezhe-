@@ -4,9 +4,13 @@ body {
 
 .form {
     width: 400px;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .jumbotron {
     background: SILVER;
+}
+
+.nav-pagination {
+    margin: 0 auto;
 }

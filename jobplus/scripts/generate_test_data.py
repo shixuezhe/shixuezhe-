@@ -1,57 +1,70 @@
-import os
-import json
+import os,json,random
 from random import randint
 from faker import Faker
 from jobplus.models import db,User,Company,Job
 
 fake = Faker('zh_CN')
+data_company = []
+company_name = []
 
-with open(os.path.join(os.path.dirname(__file__),'..','datas','companies.json')) as f:
+with open(os.path.join(os.path.dirname(__file__),'..','datas','company.json')) as f:
     companies = json.load(f)
+    for i in companies:
+        if i not in data_company:
+            data_company.append(i)
+            company_name.append(i['name'])
 
- def iter_user():
-    for company in companies:
-        yeild User(
+def iter_users():
+    for company in data_company:
+        yield User(
             username=company['name'],
             email=fake.email(),
             password='123456',
             role=20
         )
 
-def iter_company():
-    for company in companies:
-        user = User.query.filter_by(username=company['name']).first()
-        yeild Company(
-            name=company['name'],
-            email=user.email,
+def iter_companys():
+    for com in data_company:
+        user = User.query.filter_by(username=com['name']).first()
+        company = Company.query.filter_by(name=com['name']).first()
+        yield Company(
+            users_id=user.id,
+            name=com['name'],
+             email=user.email,
             number=fake.phone_number(),
             address=fake.address(),
-            logo=company['logo'],
-            finance=company['finance'],
-            type=company['type'],
-            staff_num=company['staff_num'],
-            description=company['description']
+            logo=com['logo'],
+            finance=com['finance'],
+            type=com['type'],
+            staff_num=com['staff_num'],
+            description=com['description']
         )
 
-def iter_job():
-    with open(os.path.join(os.path.dirname(__file__),'..','datas','jobs.json')) as f:
-        jobs=json.load(f)
-        for job in jobs:
-            yeild Job(
+def iter_jobs():
+    id_list = []
+    companies = Company.query.all() 
+    for i in companies:
+        id_list.append(i.id)
+    with open(os.path.join(os.path.dirname(__file__),'..','datas','job.json')) as f:
+        for job in json.load(f):
+            yield Job(
+                company_id=random.choice(id_list),
                 name=job['name'],
                 wage_low=job['wage_low'],
                 wage_high=job['wage_high'],
                 location=job['location'],
                 experience=job['experience'],
-                degree=job['degree']
+                degree=job['degree'],
+                tags=','.join(job['tags'])
             )
 
+
 def run():
-    for user in iter_user:
+    for user in iter_users():
         db.session.add(user)
-    for company in iter_company:
+    for company in iter_companys():
         db.session.add(company)
-    for job in iter_job:
+    for job in iter_jobs():
         db.session.add(job)
 
     try:

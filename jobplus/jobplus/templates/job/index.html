@@ -57,7 +57,7 @@ Job
       <div class="job-box">
         <div class="caption">
           <a href="#">
-            <h2 class="job-name">{{ job.name }}</h2>
+            <h3 class="job-name">{{ job.name }}</h3>
             <span class="timesince"></span>
             <p class="required">{{ job.experience }}/{{ job.degree }}</p>
           </a>
@@ -79,5 +79,5 @@ Job
     </div>
     {% endfor %}
 </div>
-{{ render_pagination(pagination, 'log.index') }}
+{{ render_pagination(pagination, 'job.index') }}
 {% endblock %}
