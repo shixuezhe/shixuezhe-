@@ -1,6 +1,7 @@
 class BaseConfig(object):
     SECRET_KEY='shixuezhe'
     INDEX_PER_PAGE=9
+    COMPANY_PER_PAGE=8
     ADMIN_PER_PAGE=15
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 

@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,redirect,flash,url_for,request,current_app
-from jobplus.models import User
+from jobplus.models import User,Company,Job
 from jobplus.forms import CompanyProfileForm
 from jobplus.decorators import company_required
 from flask_login import login_required,current_user
@@ -7,20 +7,19 @@ from flask_login import login_required,current_user
 company = Blueprint('company',__name__,url_prefix = '/company')
 
 @company.route('/')
-@company_required
 def index():
     page = request.args.get('page',default=1,type=int)
-    pagination = Company.query.pagination(
+    pagination = Company.query.order_by(Company.created_at.desc()).paginate(
         page=page,
-        per_page=current_app.config['INDEX_PER_PAGE'],
+        per_page=current_app.config['COMPANY_PER_PAGE'],
         error_out=False
     )
-    return render_template('company/index.html',pagination=pagination)
+    return render_template('company/index.html',pagination=pagination,active='company')
 
 @company.route('/manage')
 @company_required
 def manage():
-    renturn render_template('company/manage.html')
+    return render_template('company/manage.html')
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required

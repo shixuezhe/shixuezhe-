@@ -23,7 +23,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          <li class="active"><a href="{{ url_for('job.index') }}">职位<span class="sr-only">(current)</span></a></li>
+          <li><a href="{{ url_for('job.index') }}">职位<span class="sr-only">(current)</span></a></li>
         <li><a href="{{ url_for('company.index') }}">公司</a></li>
         {% if current_user.is_authenticated and current_user.is_company %}
         <li><a href="{{ url_for('company.manage') }}">管理</a></li>
@@ -50,7 +50,7 @@
 </nav>
 {% block big %}
 <div class="jumbotron">
-   <h1>JOBPLUS</h1>
+   <h2>JOBPLUS</h2>
    <p>领先的互联网求职.招聘平台</p>
 </div>
 {% endblock %}
