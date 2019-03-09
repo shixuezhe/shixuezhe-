@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,redirect,flash,url_for
+from flask import Blueprint,render_template,redirect,flash,url_for,request,current_app
 from jobplus.models import User
 from jobplus.forms import CompanyProfileForm
 from jobplus.decorators import company_required
@@ -9,8 +9,18 @@ company = Blueprint('company',__name__,url_prefix = '/company')
 @company.route('/')
 @company_required
 def index():
-    return render_template('company/index.html')
+    page = request.args.get('page',default=1,type=int)
+    pagination = Company.query.pagination(
+        page=page,
+        per_page=current_app.config['INDEX_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('company/index.html',pagination=pagination)
 
+@company.route('/manage')
+@company_required
+def manage():
+    renturn render_template('company/manage.html')
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required
