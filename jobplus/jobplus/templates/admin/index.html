@@ -9,13 +9,13 @@ Admin
   <div class='col-md-3'>
     <h4>控制台</h4>
     <div class='list-group'>
-      <a href='#' class='list-group-item'>企业管理</a>
-      <a href='#' class='list-group-item'>用户管理</a>
+      <a href='{{ url_for('admin.company_manage') }}' class='list-group-item'>企业管理</a>
+      <a href='{{ url_for('admin.user_manage') }}' class='list-group-item'>用户管理</a>
     </div>
     {% block operation %}{% endblock %}
   </div>
   <div class='col-md-9'>
-    {% block company %}{% endblock %}
+    {% block admin %}{% endblock %}
   </div>
 </div>
 {% endblock %}

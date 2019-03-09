@@ -108,7 +108,7 @@ class CompanyProfileForm(FlaskForm):
     def update_company(self,user):
         user.username = self.name.data
         user.email = self.email.data
-        if self.password:
+        if self.password.data:
             user.password = self.password.data
         if user.companies:
             companies = user.companies
@@ -118,4 +118,42 @@ class CompanyProfileForm(FlaskForm):
         self.populate_obj(companies)
         db.session.add(user)
         db.session.add(companies)
+        db.session.commit()
+
+class UserEditForm(FlaskForm):
+    username = StringField('用户名')
+    email = StringField('邮箱', validators=[Required(), Email()])
+    password = PasswordField('密码', validators=[Required(), Length(6, 24)])
+    phone_number = StringField('手机号')
+    submit = SubmitField('提交')
+
+    def update_user(self,user):
+        self.populate_obj(user)
+        if self.password.data:
+           user.password=self.password.data
+        db.session.add(user)
+        db.session.commit()
+
+class CompanyEditForm(FlaskForm):
+    name = StringField('企业名称')
+    email = StringField('邮箱', validators=[Required(), Email()])
+    number = StringField('手机号')
+    password = PasswordField('密码', validators=[Required(), Length(6, 24)])
+    address = StringField('公司地址')
+    description = StringField('概述')
+    submit = SubmitField('提交')
+
+    def update_company(self,company):
+        company.username = self.name.data
+        company.email = self.email.data
+        if self.password.data:
+            company.password = self.password.data
+        if company.users:
+            users = company.users
+        else:
+            user = User()
+            user.id = company.users_id
+        self.populate_obj(user)
+        db.session.add(company)
+        db.session.add(user)
         db.session.commit()
