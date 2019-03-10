@@ -4,8 +4,12 @@
 {% block body %}
 <div class="container">
     <ul class="nav nav-tabs list-title">
-      {% for job in job_list %}
-      <div class="col-sm-6 col-md-4 job">
+      <li class="active" role="presentation">
+          <a href="/job/">最新职位</a>
+      </li>
+      <div class="job-list">
+        {% for job in job_list %}
+        <div class="col-sm-6 col-md-4 job">
         <div class="job-box">
           <div class="caption">
           <a href="#">
@@ -29,15 +33,20 @@
           </div>
         </div>
       </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </ul>
     <p class="list-more">
         <a class="btn btn-success btn-lg list-more-btn" href="/job/">更多职位</a>
     </p>
 
     <ul class="nav nav-tabs list-title">
-    {% for company in company_list %}
-    <div class="col-sm-6 col-md-4 company-item">
+       <li class="active" role="presentation">
+          <a href="/company/">最新公司</a>
+       </li>
+       <div class="company-list">
+       {% for company in company_list %}
+       <div class="col-sm-6 col-md-4 company-item">
       <div class="thumbnail">
           <a href="#">
             <img width="100" height="100" class="media-object" alt="公司logo" src="{{ company.logo }}"/>
@@ -48,7 +57,8 @@
             <p class="company-zhaopin">在招职位：待设定</p>
       </div>
     </div>
-    {% endfor %}
+       {% endfor %}
+       </div>
     </ul>
     <p class="list-more">
         <a class="btn btn-success btn-lg list-more-btn" href="/company/">更多企业</a>
