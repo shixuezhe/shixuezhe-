@@ -8,7 +8,7 @@ admin = Blueprint('admin',__name__,url_prefix='/admin')
 @admin.route('/')
 @admin_required
 def index():
-    return render_template('admin/index.html')
+    return render_template('admin/index.html',active='admin')
 
 @admin.route('/user')
 @admin_required
@@ -19,7 +19,7 @@ def user_manage():
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/user_manage.html',pagination=pagination)
+    return render_template('admin/user_manage.html',pagination=pagination,active='user_manage')
 
 @admin.route('/company')
 @admin_required
@@ -30,7 +30,7 @@ def company_manage():
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/company_manage.html',pagination=pagination)
+    return render_template('admin/company_manage.html',pagination=pagination,active='company_manage')
 
 @admin.route('/user/create',methods=['GET','POST'])
 @admin_required

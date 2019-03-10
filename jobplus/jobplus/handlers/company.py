@@ -19,7 +19,7 @@ def index():
 @company.route('/manage')
 @company_required
 def manage():
-    return render_template('company/manage.html')
+    return render_template('company/manage.html',active='manage')
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required
@@ -30,7 +30,7 @@ def companyprofile():
     if form.validate_on_submit():
         form.update_company(current_user)
         flash('个人信息更新成功','success')
-        return redirect(url_for('company.index'))
+        return redirect(url_for('front.index'))
     return render_template('company/companyprofile.html',form=form)
 
 

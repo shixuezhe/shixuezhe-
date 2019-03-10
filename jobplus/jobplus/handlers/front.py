@@ -8,8 +8,8 @@ front=Blueprint('front',__name__)
 
 @front.route('/')
 def index():
-    job_list = Job.query.order_by(Job.created_at.desc()).limit(9)
-    company_list = Company.query.order_by(Company.created_at.desc()).limit(8)
+    job_list = Job.query.order_by(Job.created_at.desc()).limit(6)
+    company_list = Company.query.order_by(Company.created_at.desc()).limit(6)
     return render_template('index.html',job_list=job_list,company_list=company_list)
 
 @front.route('/userregister',methods=['GET','POST'])
