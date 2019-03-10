@@ -4,37 +4,37 @@
 {% block body %}
 <div class="container">
     <ul class="nav nav-tabs list-title">
-    {% for job in job_list %}
-    <div class="col-sm-6 col-md-4 job">
-      <div class="job-box">
-        <div class="caption">
+      {% for job in job_list %}
+      <div class="col-sm-6 col-md-4 job">
+        <div class="job-box">
+          <div class="caption">
           <a href="#">
             <h3 class="job-name">{{ job.name }}</h3>
             <span class="timesince"></span>
             <p class="required">{{ job.experience }}/{{ job.degree }}</p>
           </a>
         </div>
-    </div>
-        <div class="media">
-          <div class="media-left">
+          <div class="media">
+            <div class="media-left">
           <a href="#">
               <img width="40" height="40" class="media-object" alt="公司logo" src="{{ job.companies.logo }}"/>
           </a>
       </div>
-          <div class="media-body">
+            <div class="media-body">
         <a href="#">
           <h4 class="media-heading">{{ job.companies.name }}</h4>
         </a>
           <span class="comapny-meta">{{ job.companies.type }}/{{ job.companies.finance }}/{{ job.companies.staff_num }}</span>
       </div>
+          </div>
         </div>
-    </div>
-    </div>
-    {% endfor %}
+      </div>
+      {% endfor %}
+    </ul>
     <p class="list-more">
         <a class="btn btn-success btn-lg list-more-btn" href="/job/">更多职位</a>
     </p>
-    </ul>
+
     <ul class="nav nav-tabs list-title">
     {% for company in company_list %}
     <div class="col-sm-6 col-md-4 company-item">
@@ -49,8 +49,9 @@
       </div>
     </div>
     {% endfor %}
+    </ul>
     <p class="list-more">
         <a class="btn btn-success btn-lg list-more-btn" href="/company/">更多企业</a>
     </p>
-    </ul>
 </div>
+{% endblock %}
