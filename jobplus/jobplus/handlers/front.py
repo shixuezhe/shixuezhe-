@@ -1,6 +1,6 @@
 from flask import Blueprint,url_for,render_template,flash,redirect
 from flask import current_app,request
-from jobplus.models import User,Company
+from jobplus.models import User,Company,Job
 from jobplus.forms import User_RegisterForm,Company_RegisterForm,LoginForm
 from flask_login import login_user,logout_user,login_required
 
@@ -8,8 +8,9 @@ front=Blueprint('front',__name__)
 
 @front.route('/')
 def index():
-
-    return render_template('index.html')
+    job_list = Job.query.order_by(Job.created_at.desc()).limit(9)
+    company_list = Company.query.order_by(Company.created_at.desc()).limit(8)
+    return render_template('index.html',job_list=job_list,company_list=company_list)
 
 @front.route('/userregister',methods=['GET','POST'])
 def userregister():
