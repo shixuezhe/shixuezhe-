@@ -70,7 +70,9 @@ class Company(Base):
 
     def __repr__(self):
         return '<Company {}>'.format(self.name)
-
+    @property
+    def url(self):
+        return url_for('company.detail',company_id=self.id)
     
 class Job(Base):
     id = db.Column(db.Integer,primary_key=True)
@@ -91,6 +93,10 @@ class Job(Base):
     
     def __repr__(self):
         return '<Job:{}>'.format(self.name)
+
+    @property
+    def url(self):
+        return url_for('job.detail',job_id=self.id)
 
 class Resume(Base):
     __tablename__ = 'resume'

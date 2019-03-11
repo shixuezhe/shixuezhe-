@@ -1,6 +1,6 @@
 from flask import render_template,Blueprint,request,current_app
 from jobplus.models import Job
-
+from datetime import datetime
 
 job = Blueprint('job',__name__,url_prefix='/job')
 
@@ -14,7 +14,8 @@ def index():
     )
     return render_template('job/index.html',pagination=pagination,active='job')
 
-@job.route('/<int:job_id>/detail')
-def job_detail(job_id):
+@job.route('/<int:job_id>')
+def detail(job_id):
     job = Job.query.get_or_404(job_id)
-    return render_template('job/detail.html',job=job)
+    time = datetime.now()
+    return render_template('job/detail.html',job=job,time=time)

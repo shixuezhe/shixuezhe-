@@ -62,3 +62,16 @@ a:visited {
     box-sizing: border-box;
 }
 
+.job_detail_name {
+    position: relative;
+    display: inline-block;
+    height: 36px;
+    font-size: 36px;
+    color: #333;
+    line-height: 36px;
+}
+
+.job-salary {
+    color: #fd5f39;
+    outline: 0;
+}

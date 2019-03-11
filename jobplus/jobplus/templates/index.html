@@ -13,7 +13,7 @@
        <div class="col-sm-6 col-md-4 job">
         <div class="job-box">
           <div class="caption">
-            <a href="#">
+              <a href="{{ url_for('job.detail',job_id=job.id) }}">
               <h3 class="job-name">{{ job.name }}</h3>
               <span class="timesince"></span>
               <p class="required">{{ job.experience }}/{{ job.degree }}</p>
