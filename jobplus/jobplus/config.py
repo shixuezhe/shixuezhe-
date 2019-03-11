@@ -3,6 +3,7 @@ class BaseConfig(object):
     INDEX_PER_PAGE=9
     COMPANY_PER_PAGE=8
     ADMIN_PER_PAGE=15
+    ONLINE_PER_PAGE=5
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 class DevelopmentConfig(BaseConfig):

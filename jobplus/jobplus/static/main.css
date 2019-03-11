@@ -75,3 +75,12 @@ a:visited {
     color: #fd5f39;
     outline: 0;
 }
+
+.company-logo {
+    width: 181px;
+    height: 181px;
+}
+
+.company-desc {
+    color: #777;
+}
