@@ -26,7 +26,7 @@
           <li class="{% if active == 'job' %}active{% endif %}"><a href="{{ url_for('job.index') }}">职位<span class="sr-only">(current)</span></a></li>
           <li class="{% if active == 'company' %}active{% endif %}"><a href="{{ url_for('company.index') }}">公司</a></li>
         {% if current_user.is_authenticated and current_user.is_company %}
-        <li class="{% if active == 'manage' %}active{% endif %}"><a href="{{ url_for('company.manage') }}">管理</a></li>
+        <li class="{% if active == 'manage' %}active{% endif %}"><a href="{{ url_for('company.manage',company_id=current_user.id) }}">管理</a></li>
         {% elif current_user.is_authenticated and current_user.is_admin %}
         <li class="{% if active == 'admin' %}active{% endif %}"><a href="{{ url_for('admin.index') }}">控制台</a></li>
         {% endif %}

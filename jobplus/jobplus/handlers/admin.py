@@ -19,7 +19,7 @@ def user_manage():
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/user_manage.html',pagination=pagination,active='user_manage')
+    return render_template('admin/user_manage.html',pagination=pagination)
 
 @admin.route('/company')
 @admin_required
@@ -30,7 +30,7 @@ def company_manage():
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
     )
-    return render_template('admin/company_manage.html',pagination=pagination,active='company_manage')
+    return render_template('admin/company_manage.html',pagination=pagination)
 
 @admin.route('/user/create',methods=['GET','POST'])
 @admin_required
