@@ -161,17 +161,18 @@ class CompanyEditForm(FlaskForm):
 class JobForm(FlaskForm):
     name = StringField('职位名称',validators=[Required(),Length(2,24)])
     wage_low = StringField('最低薪资',validators=[Required(),Length(1,8)])
-    wage_high = StringField('最高薪资', validators=[Required(), Length(1,8)])
-    location = StringField('工作地点', validators=[Required(), Length(1,24)])
-    tags = StringField('行业标签', validators=[ Length(1,64)])
-    experience = StringField('经验要求', validators=[ Length(2,64)])
-    degree = StringField('学历要求', validators=[ Length(1,64)])
-    is_fulltime = StringField('全职/兼职/实习生', validators=[ Length(1,64)])
-    description = StringField('工作描述', validators=[ Length(1,512)])
+    wage_high = StringField('最高薪资',validators=[Required(), Length(1,8)])
+    location = StringField('工作地点',validators=[Required(), Length(1,24)])
+    tags = StringField('行业标签',validators=[ Length(1,64)])
+    experience = StringField('经验要求',validators=[ Length(2,64)])
+    degree = StringField('学历要求',validators=[ Length(1,64)])
+    is_fulltime = StringField('全职/兼职/实习生',validators=[ Length(1,64)])
+    description = StringField('工作描述',validators=[ Length(1,512)])
     submit = SubmitField('提交')
 
-    def create_job(self):
+    def create_job(self,company_id):
         job = Job()
+        job.company_id = company_id
         self.populate_obj(job)
         db.session.add(job)
         db.session.commit()
