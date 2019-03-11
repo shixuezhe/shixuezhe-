@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Job-detail
+{% endblock %}
+
+{% block big %}
+<div class="jumbotron">
+  <div class="container">
+    ::before
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <img src=""/>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <h2>{{ company.name }}</h2>
+      <p></p>
+      <a href="#"></a>
+    </div>
+    ::after
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  ::bofore
+  <div class="col-md-8">
+    <ul class="nav nacv-tabs">
+      ::defore
+      <li role="presentation" class="active">
+        <a href="{{ url_for('company.detail',company_id=company_id) }}">公司介绍</a>
+      </li>
+      <li role="presentation" class="{% if active=online_job %}active{% endif %}">
+        <a href="{{ url_for('company.online_job',company_id=company_id) }}">在招职位</a>
+      </li>
+      ::after
+    </ul>
+    <div class="company-detail">
+        {{ company.details }}
+    </div>
+</div>
+  <div class="col-md-4">
+    <h4>公司基本信息</h4>
+    <p>领域：{{ company.type }}</p>
+    <p>融资：{{ company.finance }}</p>
+    <p>规模：{{ company.staff_num }}</p>
+    <P>城市：{{ company.location }}</P>
+  </div>
+  ::after
+{% endblock %}

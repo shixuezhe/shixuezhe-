@@ -16,6 +16,16 @@ def index():
     )
     return render_template('company/index.html',pagination=pagination,active='company')
 
+@company.route('/<int:company_id>/')
+def detail(company_id):
+    company = Company.query.get_or_404(company_id)
+    return render_template('company/detail.html',company_id=company_id)
+
+@company.route('/<int:company_id>/online_jobs')
+def online_job(company_id):
+    job = Job.query.filter_by(company_id=company_id).all()
+    return render_template(company/online_job.html,company_id=company_id,active='online_job',job=job)
+
 @company.route('/<int:company_id>/manage')
 @company_required
 def manage(company_id):
