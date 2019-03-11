@@ -76,4 +76,3 @@ def companyprofile():
     return render_template('company/companyprofile.html',form=form)
 
 
-
