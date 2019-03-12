@@ -1,0 +1,22 @@
+sudo pip3 install flask flask-sqlalchemy mysqlclient flask-migrate flask-wtf flask-login faker
+
+$ sudo service mysql start
+$ mysql -u root
+>>> create database simpledu;
+$ export FLASK_APP=manage.py
+$ export FLASK_DEBUG=1
+
+# ?? flask-migrate 
+$ flask db init
+$ flask db migrate -m 'init database'
+$ flask db upgrade
+
+$ flask shell
+>>> from scripts.generate_test_datas import run
+>>> run()
+
+$ flask shell
+>>> from simpledu.models import db, User
+>>> user = User(username='admin',email='admin@shiyanlou.com', password='shiyanlou',role=30)
+>>> db.session.add(user)
+>>> db.session.commit()
