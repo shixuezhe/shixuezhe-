@@ -20,7 +20,7 @@ Job-detail
       </p>
     </div>
     <div class="col-md-4">
-      <a class="btn btn-success btn-lg dilivery-btn"  href="#">
+      <a class="btn btn-success btn-lg dilivery-btn"  href="{{ url_for('job.resume',job_id=job_id) }}">
         投递简历
       </a>
     </div>
@@ -30,7 +30,6 @@ Job-detail
 
 {% block body %}
 <div class="container">
-  ::before
   <div class="col-md-8">
     <div class="job_detail">
       <h3>职位标签</h3>
@@ -49,12 +48,11 @@ Job-detail
     </div>
     <div class="media-body">
     </div>
-    <h4>{{ job.companies.name }}</h4>
+    <a href="{{ url_for('company.detail',company_id=job.companies.id) }}">{{ job.companies.name }}</a>
     <p>领域：{{ job.companies.type }}</p>
     <p>融资：{{ job.companies.finance }}</p>
     <p>规模：{{ job.companies.staff_num }}</p>
     <p>城市：{{ job.companies.location }}</p>
   </div>
-  ::after
 </div>
 {% endblock %}

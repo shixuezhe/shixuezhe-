@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,redirect,flash,url_for,request,current_app
-from jobplus.models import User,Company,Job,db
+from jobplus.models import User,Company,Job,db,Delivery
 from jobplus.forms import CompanyProfileForm,JobForm
 from jobplus.decorators import company_required
 from flask_login import login_required,current_user
@@ -73,6 +73,18 @@ def job_delete(company_id):
     db.session.commit()
     flash('职位删除成功','success')
     return redirect(url_for('company.manage_job',company_id=company_id))
+
+@company.route('/<int:company_id>/manage/resume')
+@company_required
+def manage_resume(company_id):
+    delivery = Delivery.query.get_or_404(company_id)
+    page = request.args.get('page',default=1,type=int)
+    pagination = Delivery.query.filter_by(company_id=company_id).paginate(
+        page=page,
+        per_page=current_app.config['ADMIN_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('company/manage_resume.html',pagination=pagination,company_id=company_id)
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required

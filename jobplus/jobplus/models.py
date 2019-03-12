@@ -48,6 +48,10 @@ class User(Base,UserMixin):
     @property
     def is_company(self):
         return self.role == self.ROLE_COMPANY
+
+    @property
+    def is_user(self):
+        return self.role == self.ROLE_USER
     
 
 class Company(Base):
@@ -112,11 +116,12 @@ class Resume(Base):
 
 class Delivery(Base):
     STATUS_WAITING = 1
-    STATUS_REJECT = 2
-    STATUS_ACCEPT = 3
+    STATUS_ACCEPT = 2
+    STATUS_REJECT = 3
 
     id = db.Column(db.Integer,primary_key=True)
     job_id = db.Column(db.Integer,db.ForeignKey('job.id',ondelete='CASCADE'))
     user_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'))
+    company_id = db.Column(db.Integer)
     status = db.Column(db.SmallInteger,default=STATUS_WAITING)
 

@@ -17,6 +17,7 @@ def userregister():
     form=User_RegisterForm()
     if form.validate_on_submit():
         form.create_user()
+        form.create_resume(user)
         flash('注册成功，请登录','success')
         return redirect(url_for('front.login'))
     return render_template('user_register.html',form=form)

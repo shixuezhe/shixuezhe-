@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField,BooleanField,TextField,ValidationError
 from wtforms.validators import Required,Length,EqualTo,URL,Email
-from jobplus.models import db,User,Company,Job,Delivery
+from jobplus.models import db,User,Company,Job,Delivery,Resume
 
 class User_RegisterForm(FlaskForm):
     username = StringField('用户名',validators=[Required(),Length(3,24)])
@@ -23,6 +23,11 @@ class User_RegisterForm(FlaskForm):
         db.session.add(user)
         db.session.commit()
         return user
+    def create_resume(self,user):
+        resume =Resume(id=user.id,name=user.username)
+        db.session.add(resume)
+        db.session.commit()
+        return resume
 
 class Company_RegisterForm(FlaskForm):
     username = StringField('企业名称',validators=[Required(),Length(3,24)])
@@ -183,3 +188,18 @@ class JobForm(FlaskForm):
         db.session.add(job)
         db.session.commit()
         return job
+
+class ResumeForm(FlaskForm):
+    name = StringField('真实姓名',validators=[Required(),Length(2,24)])
+    age = StringField('年龄',validators=[Required(),Length(1,8)])
+    work_age = StringField('工作年限',validators=[Required(), Length(1,8)])
+    home_city = StringField('籍贯',validators=[Required(), Length(1,24)])
+    edu_experience = TextField('教育经历',validators=[ Length(1,512)])
+    job_experience = TextField('工作经历',validators=[ Length(1,512)])
+    project_experience = TextField('工作经历',validators=[ Length(1,512)])
+    submit = SubmitField('提交')
+
+    def update_resume(self,resume):
+        self.populate_obj(resume)
+        db.session.add(resume)
+        db.session.commit()

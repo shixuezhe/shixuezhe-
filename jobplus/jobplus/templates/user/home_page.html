@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+User-home
+{% endblock %}
+
+{% block big %}
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-8">
+      <li class='home-name'>姓名：{{ resume.name }}</li>
+      <li class="home-age">年龄：{{ resume.age }}</li>
+      <li class="home-city">籍贯：{{ resume.home_city }}</li>
+      <li class="home-work">工作年限：{{ resume.work_age }}</li>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-success btn-lg dilivery-btn"  href="{{ url_for('user.resume',user_id=user_id) }}">
+        编辑简历
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-md-8">
+    <div class="job_detail">
+      <h3>教育经历</h3>
+        <p >{{ resume.edu_experience }}</p>
+      <h3>工作经历</h3>
+       <p>{{ resume.job_experience }}</p>
+      <h3>项目经历</h3>
+       <p>{{ resuem.project_experience }}</p>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="media-left">
+      <a href="#">
+        <img width="150" height="150" class="media-object" src="http://image.so.com/i?q=%E4%B8%AA%E4%BA%BA%E5%A4%B4%E5%83%8F%E6%A8%A1%E6%9D%BF&src=srp#/liteflow/list?imgkey=t01b98e0825f2efd8f0.png&prevsn=-1&currsn=0"/>
+      </a>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

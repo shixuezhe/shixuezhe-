@@ -29,8 +29,7 @@ class JobSpider(scrapy.Spider):
                 'degree':job.xpath('.//div[@class="p_bot"]/div/text()').re(r'\s*(.+)\s*/\s*(.+)\s*')[1],
                 'wage_low':job.xpath('.//span[@class="money"]/text()').re(r'(.+)-(.+)')[0],
                 'wage_high': job.xpath('.//span[@class="money"]/text()').re(r'(.+)-(.+)')[1],
-                'tags':job.xpath('.//div[@class="list_item_bot"]/div/span/text()').extract(),
-                'company':job.xpath('.//div[@class="company_name"]/a/text()').extract_first()
+                'tags':job.xpath('.//div[@class="list_item_bot"]/div/span/text()').extract()
                 }
 
 
