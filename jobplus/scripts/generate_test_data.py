@@ -1,5 +1,4 @@
 import os,json,random
-from random import randint
 from faker import Faker
 from jobplus.models import db,User,Company,Job
 
@@ -30,7 +29,7 @@ def iter_companys():
         yield Company(
             users_id=user.id,
             name=com['name'],
-             email=user.email,
+            email=user.email,
             number=fake.phone_number(),
             address=fake.address(),
             logo=com['logo'],

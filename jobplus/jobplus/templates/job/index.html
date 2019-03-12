@@ -62,20 +62,20 @@ Job
             <p class="required">{{ job.experience }}/{{ job.degree }}</p>
           </a>
         </div>
-    </div>
-    <div class="media">
-      <div class="media-left">
-          <a href="#">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
               <img width="50" height="50" class="media-object" alt="公司logo" src="{{ job.companies.logo }}"/>
-          </a>
+            </a>
+          </div>
+          <div class="media-body">
+            <a href="#">
+              <h4 class="media-heading">{{ job.companies.name }}</h4>
+            </a>
+              <span class="comapny-meta">{{ job.companies.type }}/{{ job.companies.finance }}/{{ job.companies.staff_num }}</span>
+          </div>
+        </div>
       </div>
-      <div class="media-body">
-        <a href="#">
-          <h4 class="media-heading">{{ job.companies.name }}</h4>
-        </a>
-          <span class="comapny-meta">{{ job.companies.type }}/{{ job.companies.finance }}/{{ job.companies.staff_num }}</span>
-      </div>
-    </div>
     </div>
     {% endfor %}
 </div>
