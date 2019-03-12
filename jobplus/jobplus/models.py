@@ -122,6 +122,8 @@ class Delivery(Base):
     id = db.Column(db.Integer,primary_key=True)
     job_id = db.Column(db.Integer,db.ForeignKey('job.id',ondelete='CASCADE'))
     user_id = db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE'))
+    job = db.relationship('Job', uselist=False, backref=db.backref('job_resume', uselist=False))
+    user = db.relationship('User', uselist=False, backref=db.backref('user_resume', uselist=False))
     company_id = db.Column(db.Integer)
     status = db.Column(db.SmallInteger,default=STATUS_WAITING)
 

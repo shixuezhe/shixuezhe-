@@ -13,11 +13,13 @@ User-home
       <li class="home-city"><h5>籍贯：{{ resume.home_city }}</h5></li>
       <li class="home-work"><h5>工作年限：{{ resume.work_age }}</h5></li>
     </div>
+    {% if current_user.is_authenticated and current_user.is_user %}
     <div class="col-md-4">
       <a class="btn btn-success btn-lg dilivery-btn"  href="{{ url_for('user.resume',user_id=user_id) }}">
         编辑简历
       </a>
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

@@ -36,8 +36,9 @@ def manage(company_id):
 @company.route('/<int:company_id>/manage/job')
 @company_required
 def manage_job(company_id):
+    company = Company.query.filter_by(users_id=company_id).first()
     page = request.args.get('page',default=1,type=int)
-    pagination = Job.query.filter_by(company_id=company_id).paginate(
+    pagination = Job.query.filter_by(company_id=company.id).paginate(
         page=page,
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
@@ -74,17 +75,69 @@ def job_delete(company_id):
     flash('职位删除成功','success')
     return redirect(url_for('company.manage_job',company_id=company_id))
 
-@company.route('/<int:company_id>/manage/resume')
+@company.route('/<int:company_id>/manage/delivery')
 @company_required
-def manage_resume(company_id):
-    delivery = Delivery.query.get_or_404(company_id)
+def manage_delivery(company_id):
     page = request.args.get('page',default=1,type=int)
     pagination = Delivery.query.filter_by(company_id=company_id).paginate(
         page=page,
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
     )
-    return render_template('company/manage_resume.html',pagination=pagination,company_id=company_id)
+    return render_template('company/manage_delivery.html',pagination=pagination,company_id=company_id)
+
+@company.route('/<int:company_id>/manage/delivery/waiting')
+@company_required
+def manage_waiting(company_id):
+    page = request.args.get('page', default=1, type=int)
+    pagination = Delivery.query.filter(company_id=company_id,status=1).paginate(
+        page=page,
+        per_page=current_app.config['ADMIN_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('company/manage_delivery.html', pagination=pagination, company_id=company_id)
+
+@company.route('/<int:company_id>/manage/delivery/accept')
+@company_required
+def manage_accept(company_id):
+    page = request.args.get('page', default=1, type=int)
+    pagination = Delivery.query.filter(company_id=company_id,status=2).paginate(
+        page=page,
+        per_page=current_app.config['ADMIN_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('company/manage_delivery.html', pagination=pagination, company_id=company_id)
+
+@company.route('/<int:company_id>/manage/delivery/accept')
+@company_required
+def manage_reject(company_id):
+    page = request.args.get('page', default=1, type=int)
+    pagination = Delivery.query.filter(company_id=company_id,status=2).paginate(
+        page=page,
+        per_page=current_app.config['ADMIN_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('company/manage_delivery.html',pagination=pagination,company_id=company_id)
+
+@company.route('/<int:company_id>/manage/delivery/<int:delivery_id>/accept')
+@company_required
+def delivery_accept(company_id,delivery_id):
+    delivery = Delivery.query.get_or_404(delivery_id)
+    delivery.status = Delivery.STATUS_ACCEPT
+    db.session.add(delivery)
+    db.session.commit()
+    flash('已安排面试,可在待面试中查看','success')
+    redirect(url_for('company.manage_dilivery',company_id=company_id))
+
+@company.route('/<int:company_id>/manage/delivery/<int:delivery_id>/accept')
+@company_required
+def delivery_reject(company_id,delivery_id):
+    delivery = Delivery.query.get_or_404(delivery_id)
+    delivery.status = Delivery.STATUS_REJECT
+    db.session.add(delivery)
+    db.session.commit()
+    flash('已拒绝投递，可在不合适中查看','success')
+    redirect(url_for('company.manage_dilivery',company_id=company_id))
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required

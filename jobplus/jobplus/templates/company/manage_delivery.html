@@ -1,0 +1,63 @@
+{% extends "company/manage.html" %}
+
+{% block title %}
+Company - deliveries
+{% endblock %}
+
+{% block operation %}
+<a href="{{ url_for('company.manage_waiting',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
+待处理
+</a>
+<a href="{{ url_for('company.manage_accept',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
+待面试
+</a>
+<a href="{{ url_for('company.job_reject',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
+不合适
+</a>
+{% endblock %}
+
+{% block company %}s
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>职位名称</th>
+      <th>求职者</th>
+      <th>投递状态</th>
+      <th>投递时间</th>
+      <th>操作</th>
+    </tr>
+    <tbody>
+      {% for delivery in pagination.items %}
+      <tr>
+        <td>{{ delivery.id }}</td>
+        <td>{{ delivery.job.name }}</td>
+        <td>{{ delivery.user.username }}</td>
+        {% if delivery.status = 1 %}
+        <td>待处理</td>
+        {% elif delivery.status = 2 %}
+        <td>待面试</td>
+        {% elif delivery.status = 3 %}
+        <td>已拒绝</td>
+        {% endif %}
+        <td>{{ delivery.created_at }}</td>
+        <td>
+          <div class="btn-group" role="group">
+            <a href="{{ url_for('user.home_page',user_id=deliver.user_id) }}" type="button" class="btn btn-default" title＝"查看">
+              查看
+            </a>
+            <a href="{{ url_for('company.job_edit',company_id=company_id) }}" type="button" class="btn btn-default" title＝"面试">
+              面试
+            </a>
+            <a href="{{ url_for('company.delivery_reject',company_id=company_id) }}" type="button" class="btn btn-default" title＝"拒绝">
+              拒绝
+            </a>
+          </div>
+        </td>
+      </tr>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </thead>
+</table>
+{% endblock %}
