@@ -8,10 +8,10 @@ User-home
 <div class="jumbotron">
   <div class="container">
     <div class="col-md-8">
-      <li class='home-name'>姓名：{{ resume.name }}</li>
-      <li class="home-age">年龄：{{ resume.age }}</li>
-      <li class="home-city">籍贯：{{ resume.home_city }}</li>
-      <li class="home-work">工作年限：{{ resume.work_age }}</li>
+      <li class='home-name'><h5>姓名：{{ resume.name }}</h5></li>
+      <li class="home-age"><h5>年龄：{{ resume.age }}</h5></li>
+      <li class="home-city"><h5>籍贯：{{ resume.home_city }}</h5></li>
+      <li class="home-work"><h5>工作年限：{{ resume.work_age }}</h5></li>
     </div>
     <div class="col-md-4">
       <a class="btn btn-success btn-lg dilivery-btn"  href="{{ url_for('user.resume',user_id=user_id) }}">
@@ -31,7 +31,7 @@ User-home
       <h3>工作经历</h3>
        <p>{{ resume.job_experience }}</p>
       <h3>项目经历</h3>
-       <p>{{ resuem.project_experience }}</p>
+       <p>{{ resume.project_experience }}</p>
     </div>
   </div>
   <div class="col-md-2">

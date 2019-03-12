@@ -12,13 +12,13 @@ def userprofile():
     if form.validate_on_submit():
         form.update_user(current_user)
         flash('个人信息更新成功','success')
-        return redirect(url_for('user.home_page',user_id=current_user.id))
+        return redirect(url_for('user.home_page'))
     return render_template('user/userprofile.html',form=form)
 
 @user.route('/<int:user_id>/home',methods=['GET','POST'])
 def home_page(user_id):
     resume = Resume.query.get_or_404(user_id)
-    return render_template('user/home_page.html',resume=resume,user_id=user_id)
+    return render_template('user/home_page.html',user_id=user_id,resume=resume)
 
 @user.route('/<int:user_id>/home/resume',methods=['GET','POST'])
 @login_required
@@ -28,7 +28,7 @@ def resume(user_id):
     if form.validate_on_submit():
         form.update_resume(resume)
         flash('简历编辑成功','success')
-        return redirect(url_for('user.home_page', user_id=user_id))
-    return render_template('user/resume.html',form=form)
+        return redirect(url_for('user.home_page',user_id=user_id))
+    return render_template('user/resume.html',form=form,user_id=user_id)
 
 

@@ -1,4 +1,4 @@
-from flask import render_template,Blueprint,request,current_app,redirect
+from flask import render_template,Blueprint,request,current_app,redirect,flash,url_for
 from jobplus.models import Job,Company,Delivery,db
 from datetime import datetime
 from flask_login import login_required,current_user

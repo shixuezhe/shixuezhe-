@@ -23,11 +23,6 @@ class User_RegisterForm(FlaskForm):
         db.session.add(user)
         db.session.commit()
         return user
-    def create_resume(self,user):
-        resume =Resume(id=user.id,name=user.username)
-        db.session.add(resume)
-        db.session.commit()
-        return resume
 
 class Company_RegisterForm(FlaskForm):
     username = StringField('企业名称',validators=[Required(),Length(3,24)])
@@ -68,6 +63,12 @@ class LoginForm(FlaskForm):
         user = User.query.filter_by(email=self.email.data).first()
         if user and not user.check_password(field.data):
             raise ValidationError('密码错误')
+
+    def create_resume(self,user):
+        resume = Resume(id=user.id,name=user.username)
+        db.session.add(resume)
+        db.session.commit()
+        return resume
 
 class UserProfileForm(FlaskForm):
     username = StringField('用户名',validators=[Required(),Length(3,24)])
@@ -196,7 +197,7 @@ class ResumeForm(FlaskForm):
     home_city = StringField('籍贯',validators=[Required(), Length(1,24)])
     edu_experience = TextField('教育经历',validators=[ Length(1,512)])
     job_experience = TextField('工作经历',validators=[ Length(1,512)])
-    project_experience = TextField('工作经历',validators=[ Length(1,512)])
+    project_experience = TextField('项目经历',validators=[ Length(1,512)])
     submit = SubmitField('提交')
 
     def update_resume(self,resume):
