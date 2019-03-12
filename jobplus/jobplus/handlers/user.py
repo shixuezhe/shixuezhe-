@@ -8,11 +8,12 @@ user=Blueprint('user',__name__,url_prefix='/user')
 @user.route('/profile',methods=['GET','POST'])
 @login_required
 def userprofile():
-    form=UserProfileForm(obj=current_user)
+    user = current_user
+    form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         form.update_user(current_user)
         flash('个人信息更新成功','success')
-        return redirect(url_for('user.home_page'))
+        return redirect(url_for('user.home_page',user_id=user.id))
     return render_template('user/userprofile.html',form=form)
 
 @user.route('/<int:user_id>/home',methods=['GET','POST'])

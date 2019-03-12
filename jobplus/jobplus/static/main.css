@@ -1,3 +1,12 @@
+.btn-delivery {
+    padding: 10px;
+    border: solid 1px #ddd;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 215px;
+}
+
 .form {
     width: 400px;
     margin: 0 auto;
@@ -22,6 +31,12 @@
 }
 
 .company-description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.company-meta {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -60,6 +75,11 @@ a:visited {
     border-radius: 5px;
     line-height: 1.5;
     box-sizing: border-box;
+}
+
+.list-group-item {
+    width: 50;
+    height: 35;
 }
 
 .job_detail_name {

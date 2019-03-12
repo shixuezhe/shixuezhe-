@@ -1,4 +1,5 @@
 import os,json,random
+from random import randint
 from faker import Faker
 from jobplus.models import db,User,Company,Job
 
@@ -24,12 +25,11 @@ def iter_users():
 
 def iter_companys():
     for com in data_company:
-        user = User.query.filter_by(username=com['name']).first()
-        company = Company.query.filter_by(name=com['name']).first()
+        users = User.query.filter_by(username=com['name']).first()
         yield Company(
-            users_id=user.id,
+            users_id=users.id,
             name=com['name'],
-            email=user.email,
+            email=users.email,
             number=fake.phone_number(),
             address=fake.address(),
             logo=com['logo'],
@@ -65,7 +65,6 @@ def run():
         db.session.add(company)
     for job in iter_jobs():
         db.session.add(job)
-
     try:
         db.session.commit()
     except Exception as e:

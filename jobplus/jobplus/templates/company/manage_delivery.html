@@ -5,18 +5,14 @@ Company - deliveries
 {% endblock %}
 
 {% block operation %}
-<a href="{{ url_for('company.manage_waiting',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
-待处理
-</a>
-<a href="{{ url_for('company.manage_accept',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
-待面试
-</a>
-<a href="{{ url_for('company.job_reject',company_id=company_id) }}" type="button" class="btn btn-success btn-admin">
-不合适
-</a>
+<div class='btn-group-vertical'>
+    <div algin='center'><a href="{{ url_for('company.manage_waiting',company_id=company_id) }}" type="button" class="btn btn-success btn-delivery">待处理</a></div>
+  <a href="{{ url_for('company.manage_accept',company_id=company_id) }}" type="button" class="btn btn-success btn-delivery">待面试</a>
+  <a href="{{ url_for('company.manage_reject',company_id=company_id) }}" type="button" class="btn btn-success btn-delivery">不合适</a>
+</div>  
 {% endblock %}
 
-{% block company %}s
+{% block company %}
 <table class="table">
   <thead>
     <tr>
@@ -33,23 +29,23 @@ Company - deliveries
         <td>{{ delivery.id }}</td>
         <td>{{ delivery.job.name }}</td>
         <td>{{ delivery.user.username }}</td>
-        {% if delivery.status = 1 %}
+        {% if delivery.status == 1 %}
         <td>待处理</td>
-        {% elif delivery.status = 2 %}
+        {% elif delivery.status == 2 %}
         <td>待面试</td>
-        {% elif delivery.status = 3 %}
+        {% elif delivery.status == 3 %}
         <td>已拒绝</td>
         {% endif %}
         <td>{{ delivery.created_at }}</td>
         <td>
-          <div class="btn-group" role="group">
-            <a href="{{ url_for('user.home_page',user_id=deliver.user_id) }}" type="button" class="btn btn-default" title＝"查看">
+          <div class="btn-group" role='group'>
+            <a href="{{ url_for('user.home_page',user_id=delivery.user_id) }}" type="button" class="btn btn-default" title＝"查看">
               查看
             </a>
-            <a href="{{ url_for('company.job_edit',company_id=company_id) }}" type="button" class="btn btn-default" title＝"面试">
+            <a href="{{ url_for('company.delivery_accept',company_id=company_id,delivery_id=delivery.id) }}" type="button" class="btn btn-default" title＝"面试">
               面试
             </a>
-            <a href="{{ url_for('company.delivery_reject',company_id=company_id) }}" type="button" class="btn btn-default" title＝"拒绝">
+            <a href="{{ url_for('company.delivery_reject',company_id=company_id,delivery_id=delivery.id) }}" type="button" class="btn btn-default" title＝"拒绝">
               拒绝
             </a>
           </div>

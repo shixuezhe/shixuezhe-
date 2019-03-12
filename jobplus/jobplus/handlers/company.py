@@ -90,7 +90,7 @@ def manage_delivery(company_id):
 @company_required
 def manage_waiting(company_id):
     page = request.args.get('page', default=1, type=int)
-    pagination = Delivery.query.filter(company_id=company_id,status=1).paginate(
+    pagination = Delivery.query.filter_by(company_id=company_id,status=1).paginate(
         page=page,
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
@@ -101,7 +101,7 @@ def manage_waiting(company_id):
 @company_required
 def manage_accept(company_id):
     page = request.args.get('page', default=1, type=int)
-    pagination = Delivery.query.filter(company_id=company_id,status=2).paginate(
+    pagination = Delivery.query.filter_by(company_id=company_id,status=2).paginate(
         page=page,
         per_page=current_app.config['ADMIN_PER_PAGE'],
         error_out=False
@@ -127,9 +127,9 @@ def delivery_accept(company_id,delivery_id):
     db.session.add(delivery)
     db.session.commit()
     flash('已安排面试,可在待面试中查看','success')
-    redirect(url_for('company.manage_dilivery',company_id=company_id))
+    return redirect(url_for('company.manage_delivery',company_id=company_id))
 
-@company.route('/<int:company_id>/manage/delivery/<int:delivery_id>/accept')
+@company.route('/<int:company_id>/manage/delivery/<int:delivery_id>/reject')
 @company_required
 def delivery_reject(company_id,delivery_id):
     delivery = Delivery.query.get_or_404(delivery_id)
@@ -137,7 +137,7 @@ def delivery_reject(company_id,delivery_id):
     db.session.add(delivery)
     db.session.commit()
     flash('已拒绝投递，可在不合适中查看','success')
-    redirect(url_for('company.manage_dilivery',company_id=company_id))
+    return redirect(url_for('company.manage_delivery',company_id=company_id))
 
 @company.route('/profile',methods=['GET','POST'])
 @login_required
