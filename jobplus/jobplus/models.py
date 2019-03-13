@@ -91,7 +91,7 @@ class Job(Base):
     is_open = db.Column(db.Boolean,default=True)
     description = db.Column(db.Text())
     company_id = db.Column(db.Integer,db.ForeignKey('company.id',ondelete='CASCADE'))
-    companies = db.relationship('Company',uselist=False,backref=db.backref('jobs',uselist=False))
+    companies = db.relationship('Company',uselist=False,backref=db.backref('jobs'))
     user_id = db.Column(db.Integer,db.ForeignKey('user.id', ondelete='CASCADE'))
     view_count = db.Column(db.Integer,default=0)
     
