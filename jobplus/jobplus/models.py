@@ -81,8 +81,8 @@ class Company(Base):
 class Job(Base):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64),nullable=False)
-    wage_low = db.Column(db.Integer,nullable=False)
-    wage_high = db.Column(db.Integer,nullable=False)
+    wage_low = db.Column(db.String(12),nullable=False)
+    wage_high = db.Column(db.String(12),nullable=False)
     location = db.Column(db.String(32),nullable=False)
     tags = db.Column(db.String(64))
     experience = db.Column(db.String(64))
