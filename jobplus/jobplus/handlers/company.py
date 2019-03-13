@@ -14,12 +14,17 @@ def index():
         per_page=current_app.config['COMPANY_PER_PAGE'],
         error_out=False
     )
-    return render_template('company/index.html',pagination=pagination,active='company')
+    for items in pagination.items:
+        job = Job.query.filter_by(company_id=items.id).all()
+        number = len(job)
+    return render_template('company/index.html',pagination=pagination,active='company',number=number)
 
 @company.route('/<int:company_id>')
 def detail(company_id):
     company = Company.query.get_or_404(company_id)
-    return render_template('company/detail.html',company=company)
+    job = Job.query.filter_by(company_id=company_id).all()
+    number = len(job)
+    return render_template('company/detail.html',company=company,number=number)
 
 @company.route('/<int:company_id>/online_jobs')
 def online_job(company_id):
