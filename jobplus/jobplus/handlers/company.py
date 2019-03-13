@@ -25,7 +25,8 @@ def detail(company_id):
 def online_job(company_id):
     company = Company.query.get_or_404(company_id)
     job = Job.query.filter_by(company_id=company_id).all()
-    return render_template('company/online_job.html',active='online_job',job=job,company=company)
+    number = len(job)
+    return render_template('company/online_job.html',active='online_job',job=job,company=company,number=number)
 
 @company.route('/<int:company_id>/manage')
 @company_required

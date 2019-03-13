@@ -30,7 +30,7 @@ Company-detail
         <a href="{{ url_for('company.detail',company_id=company.id) }}">公司介绍</a>
       </li>
       <li role="presentation" class="{% if active == 'online_job' %}active{% endif %}">
-        <a href="{{ url_for('company.online_job',company_id=company.id) }}">在招职位</a>
+        <a href="{{ url_for('company.online_job',company_id=company.id) }}">在招职位{{ number }}</a>
       </li>
     </ul>
     <div class="company-detail">

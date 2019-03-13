@@ -10,7 +10,10 @@ front=Blueprint('front',__name__)
 def index():
     job_list = Job.query.order_by(Job.created_at.desc()).limit(6)
     company_list = Company.query.order_by(Company.created_at.desc()).limit(6)
-    return render_template('index.html',job_list=job_list,company_list=company_list)
+    for company in company_list:
+        job_num = Job.query.filter_by(company_id=company.id).all()
+        number = len(job_num)
+    return render_template('index.html',job_list=job_list,company_list=company_list,number=number)
 
 @front.route('/userregister',methods=['GET','POST'])
 def userregister():
