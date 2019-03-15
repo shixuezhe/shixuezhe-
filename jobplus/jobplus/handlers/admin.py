@@ -45,7 +45,7 @@ def create_user():
 @admin.route('/company/create',methods=['GET','POST'])
 @admin_required
 def create_company():
-    form=Company_RegisterForm()
+    form = Company_RegisterForm()
     if form.validate_on_submit():
         form.create_company()
         flash('企业创建成功','success')
@@ -67,7 +67,7 @@ def user_edit(user_id):
 @admin.route('/company/<company_id>/edit',methods=['GET','POST'])
 @admin_required
 def company_edit(company_id):
-    company=Company.query.get_or_404(company_id)
+    company = Company.query.get_or_404(company_id)
     form = CompanyEditForm(obj=company)
     if form.validate_on_submit():
         form.update_company(company)
@@ -87,7 +87,7 @@ def user_delete(user_id):
 @admin.route('/company/<company_id>/delete',methods=['GET','POST'])
 @admin_required
 def company_delete(company_id):
-    company=Company.query.get_or_404(company_id)
+    company = Company.query.get_or_404(company_id)
     db.session.delete(company)
     db.session.commit()
     flash('企业删除成功','success')

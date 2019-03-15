@@ -136,7 +136,7 @@ class UserEditForm(FlaskForm):
     def update_user(self,user):
         self.populate_obj(user)
         if self.password.data:
-           user.password=self.password.data
+           user.password = self.password.data
         db.session.add(user)
         db.session.commit()
 

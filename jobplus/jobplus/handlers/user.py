@@ -3,7 +3,7 @@ from jobplus.models import User,Resume
 from jobplus.forms import UserProfileForm,ResumeForm
 from flask_login import login_required,current_user
 
-user=Blueprint('user',__name__,url_prefix='/user')
+user = Blueprint('user',__name__,url_prefix='/user')
 
 @user.route('/profile',methods=['GET','POST'])
 @login_required

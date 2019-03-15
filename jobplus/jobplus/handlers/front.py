@@ -4,7 +4,7 @@ from jobplus.models import User,Company,Job
 from jobplus.forms import User_RegisterForm,Company_RegisterForm,LoginForm
 from flask_login import login_user,logout_user,login_required
 
-front=Blueprint('front',__name__)
+front = Blueprint('front',__name__)
 
 @front.route('/')
 def index():
@@ -17,7 +17,7 @@ def index():
 
 @front.route('/userregister',methods=['GET','POST'])
 def userregister():
-    form=User_RegisterForm()
+    form = User_RegisterForm()
     if form.validate_on_submit():
         form.create_user()
         flash('注册成功，请登录','success')
@@ -26,7 +26,7 @@ def userregister():
 
 @front.route('/companyregister',methods=['GET','POST'])
 def companyregister():
-    form=Company_RegisterForm()
+    form = Company_RegisterForm()
     if form.validate_on_submit():
         form.create_company()
         flash('注册成功，请登录','success')
@@ -35,9 +35,9 @@ def companyregister():
 
 @front.route('/login',methods=['POST','GET'])
 def login():
-    form=LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
-        user=User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first()
         login_user(user,form.remember_me.data)
         if user.is_admin:
             return redirect(url_for('admin.index'))
